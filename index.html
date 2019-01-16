@@ -30,26 +30,30 @@
 <script>
 
     function Voter(options) {
+
         this.options = options.elem;
-        this.print=console.log(this.options.children[0]);
+
         this.setVote = function () {
+
             var kids = this.options.children;
             var vote = Number(kids[1].innerHTML);
+
             kids[0].onclick=function (){
-                while (vote>0) {
-                    vote-=1;
-                }
+                if(vote>0){
+                vote-=1;}
                 return kids[1].innerHTML = String(vote);
-            };
-            kids[2].onclick=function () {
-                vote+=1;
-                return kids[1].innerHTML = String(vote);
-                if (vote>0 && vote%10){
-                    alert('Congratulations! You reached new tenner of votes!!!')
-                }
             };
 
-        }
+            kids[2].onclick=function () {
+                vote+=1;
+                setTimeout(function () {
+                    if (vote > 0 && vote % 10 == 0) {
+                        alert('Congratulations! You reached new tenner of votes!!!')}
+                },0)
+                return kids[1].innerHTML = String(vote);
+            };
+
+        };
     }
 
     var voter = new Voter({
