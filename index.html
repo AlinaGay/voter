@@ -46,12 +46,25 @@
 
             kids[2].onclick=function () {
                 vote+=1;
-                setTimeout(function () {
+                // first way for tenner
+                /*setTimeout(function () {
                     if (vote > 0 && vote % 10 == 0) {
                         alert('Congratulations! You reached new tenner of votes!!!')}
-                },0)
+                },0);*/
+                //second way for tenner
+                    if (vote > 0 && vote % 10 == 0) {
+                        kids[1].addEventListener("tenner", function (tennerEvent) {
+                            alert('Congratulations! You reached new tenner of votes!!! ' + vote + '!!!');
+                        });
+                        var tennerEvent = new CustomEvent("tenner", {
+                            detail: {vote: vote}
+                        });
+                        kids[1].dispatchEvent(tennerEvent);
+                    }
                 return kids[1].innerHTML = String(vote);
+
             };
+
 
         };
     }
